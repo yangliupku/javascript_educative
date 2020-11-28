@@ -1,5 +1,17 @@
-const sum = require('../js/find_mutual_friends')
+const C = require("../js/find_mutual_friends");
 
-test('happy path', () => {
-    expect(sum(1, 2)).toBe(3);
-})
+test("test setup", () => {
+  expect(
+    C.setup([
+      ["A", "B"],
+      ["A", "C"],
+      ["A", "D"],
+      ["B", "D"],
+    ])
+  ).toStrictEqual({
+    A: ["B", "C", "D"],
+    B: ["A", "D"],
+    C: ["A"],
+    D: ["A", "B"],
+  });
+});
