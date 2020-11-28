@@ -15,7 +15,7 @@
  */
 
 function setup(arr) {
-  friends = {};
+  var friends = {};
   for (var i = 0; i < arr.length; i++) {
     [a, b] = arr[i];
     if (a in friends && !friends[a].includes(b)) {
@@ -54,4 +54,27 @@ function mapper(setup_arr) {
   }
   return friends_arr;
 }
-module.exports = { setup, mapper };
+
+/**
+ * group each mapped object representation of the friends
+ * inputs = [
+ *  { 'AB' : ['B', 'C', 'D'] }, // from 'A'
+ *  { 'AB' : ['A', 'D'] }, // from 'B'
+ * ]
+ * outputs ={ 'AB' : [['B', 'C', 'D'],['A', 'D']] },
+ */
+function group(mapped_arr) {
+  var grouped_friends = {};
+  mapped_arr.forEach(function (row) {
+    var key = Object.keys(row)[0];
+    friends = row[key];
+    if (key in grouped_friends) {
+      grouped_friends[key].push(friends);
+    } else {
+      grouped_friends[key] = [friends];
+    }
+  });
+  return grouped_friends;
+}
+
+module.exports = { setup, mapper, group };
