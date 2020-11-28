@@ -1,8 +1,8 @@
-const C = require("../js/find_mutual_friends");
+const mutual_friendts = require("../js/find_mutual_friends");
 
 test("test setup", () => {
   expect(
-    C.setup([
+    mutual_friendts.setup([
       ["A", "B"],
       ["A", "C"],
       ["A", "D"],
