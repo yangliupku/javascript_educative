@@ -86,3 +86,30 @@ test("test group multiple", () => {
     ],
   });
 });
+
+test("test reduce single", () => {
+  expect(
+    mutual_friendts.reducer({
+      AB: [
+        ["B", "C", "D"],
+        ["A", "D"],
+      ],
+    })
+  ).toStrictEqual({ AB: ["D"] });
+});
+
+test("test mapreudce", () => {
+  expect(
+    mutual_friendts.mapreduce([
+      ["A", "B"],
+      ["A", "C"],
+      ["A", "D"],
+      ["B", "D"],
+    ])
+  ).toStrictEqual({
+    AB: ["D"],
+    AC: [],
+    AD: ["B"],
+    BD: ["A"],
+  });
+});

@@ -77,4 +77,29 @@ function group(mapped_arr) {
   return grouped_friends;
 }
 
-module.exports = { setup, mapper, group };
+/**
+ * reduce list of friends by taking the common elements
+ * inputs = { 'AB' : [['B', 'C', 'D'],['A', 'D']] }
+ * outputs = {'AB': ['D']}
+ */
+function reducer(grouped_obj) {
+  reduced_friends = {};
+  for (const [key, friend_arr] of Object.entries(grouped_obj)) {
+    reduced_friends[key] = friend_arr[0].filter((name) =>
+      friend_arr[1].includes(name)
+    );
+  }
+  return reduced_friends;
+}
+
+/**
+ * map reduce. put the previous setups together
+ */
+function mapreduce(friends) {
+  setup_arr = setup(friends);
+  mapped_arr = mapper(setup_arr);
+  grouped_obj = group(mapped_arr);
+  return reducer(grouped_obj);
+}
+
+module.exports = { setup, mapper, group, reducer, mapreduce };
