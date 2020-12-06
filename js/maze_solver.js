@@ -16,4 +16,10 @@ class Grid {
   }
 }
 
+class MazeSolver extends Grid {
+  constructor(arr) {
+    super(arr);
+  }
+}
+
 module.exports = { Grid };
