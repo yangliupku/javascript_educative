@@ -29,3 +29,16 @@ test("test canTraverse", () => {
   expect(test_solver.canTraverse(2, 0)).toBe(false);
   expect(test_solver.canTraverse(-1, 3)).toBe(false);
 });
+
+test("test neighbors", () => {
+  let test_solver = new maze_solver.MazeSolver([
+    [1, 0, 1],
+    [1, 1, 0],
+    [0, 1, 1],
+  ]);
+  // expect(test_solver.getNeighbors(0, 0)).toStrictEqual([[1, 0]]);
+  expect(test_solver.getNeighbors(1, 0)).toStrictEqual([
+    [1, 1],
+    [0, 0],
+  ]);
+});

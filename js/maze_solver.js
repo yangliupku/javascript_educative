@@ -35,6 +35,28 @@ class MazeSolver extends Grid {
       return false;
     }
   }
+  /**
+   * Get all valid next positions from (x, y)
+   * @param {*} x
+   * @param {*} y
+   */
+  getNeighbors(x, y) {
+    const directions = [
+      [0, 1],
+      [0, -1],
+      [1, 0],
+      [-1, 0],
+    ];
+    var neighbors = [];
+    for (const [dx, dy] of directions) {
+      const xx = x + dx;
+      const yy = y + dy;
+      if (this.canTraverse(xx, yy)) {
+        neighbors.push([xx, yy]);
+      }
+    }
+    return neighbors;
+  }
 }
 
 module.exports = { Grid, MazeSolver };
