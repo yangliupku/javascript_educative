@@ -35,6 +35,7 @@ class MazeSolver extends Grid {
       return false;
     }
   }
+
   /**
    * Get all valid next positions from (x, y)
    * @param {*} x
@@ -56,6 +57,41 @@ class MazeSolver extends Grid {
       }
     }
     return neighbors;
+  }
+
+  checkVisited(x, y, visited) {
+    return visited.some((e) => e[0] === x && e[1] === y);
+  }
+
+  /**
+   * Return true if there's path from source(x1, y1) to target (x2, y2)
+   * @param {*} x1
+   * @param {*} y1
+   * @param {*} x2
+   * @param {*} y2
+   */
+  solve(x1, y1, x2, y2) {
+    var visited = [];
+    if (!this.canTraverse(x1, y1)) {
+      return false;
+    }
+    return this.dfs_visit(x1, y1, x2, y2, visited);
+  }
+
+  dfs_visit(x, y, x_target, y_target, visited) {
+    if (x === x_target && y === y_target) {
+      return true;
+    }
+    var neighbors = this.getNeighbors(x, y);
+    for (const [xx, yy] of neighbors) {
+      if (!this.checkVisited(xx, yy, visited)) {
+        visited.push([xx, yy]);
+        if (this.dfs_visit(xx, yy, x_target, y_target, visited)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
 
