@@ -20,6 +20,21 @@ class MazeSolver extends Grid {
   constructor(arr) {
     super(arr);
   }
+
+  /**
+   * Return true if index (x, y) is valid to move through.
+   * @param {*} x
+   * @param {*} y
+   */
+  canTraverse(x, y) {
+    let nrows = this.grid.length;
+    let ncols = this.grid[0].length;
+    if (x >= 0 && x < nrows && y >= 0 && y < ncols) {
+      return this.grid[x][y] === 1 ? true : false;
+    } else {
+      return false;
+    }
+  }
 }
 
-module.exports = { Grid };
+module.exports = { Grid, MazeSolver };
