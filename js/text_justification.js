@@ -4,7 +4,7 @@
  * @param {Number} width  Maixmum allowed width.
  * @returns {[[String], [String]]} Frist array of satisfies the width constraint. Second array is the rest.
  */
-function splitLine(line, width) {
+function splitLine_loop(line, width) {
   var curr_line = [];
   var rest_line = [];
   var curr_line_width = 0;
@@ -23,4 +23,15 @@ function splitLine(line, width) {
   return [curr_line, rest_line];
 }
 
-module.exports = { splitLine };
+function splitLine_rec(line, width) {
+  if (line.length === 0) {
+    return [[], []];
+  }
+  if (line[0].length > width) {
+    return [[], [...line]];
+  }
+  [s1, s2] = splitLine_rec(line.slice(1), width - line[0].length - 1);
+  return [[line[0], ...s1], [...s2]];
+}
+
+module.exports = { splitLine: splitLine_rec };
